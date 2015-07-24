@@ -7,11 +7,36 @@
 //
 
 import UIKit
+import RealmSwift
 
 class ViewController: UIViewController {
 
+  let realm = Realm()
+  
+  @IBOutlet weak var TripLabel: UILabel!
+  @IBOutlet weak var TripField: UITextField!
+  @IBOutlet weak var tripCount: UILabel!
+  
+  @IBOutlet weak var ListField: UITextField!
+  
+  
+  @IBAction func addTripButton(sender: UIButton) {
+    if var newTrip = TripField.text {
+      TripLabel.text = newTrip
+      realm.write {
+        realm.create(Trip.self, value: [newTrip])
+      }
+    }
+    tripCount.text = "\(realm.objects(Trip).count)"
+  }
+  
+  
   override func viewDidLoad() {
     super.viewDidLoad()
+    let trips = realm.objects(Trip)
+    
+    tripCount.text = "\(trips.count)"
+    
     // Do any additional setup after loading the view, typically from a nib.
   }
 

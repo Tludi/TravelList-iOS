@@ -7,7 +7,6 @@ use_frameworks!
 target 'TravelList' do
   pod "Realm"
   pod "RealmSwift"
-#  pod "IQKeyboardManager"
 end
 
 target 'TravelListTests' do
